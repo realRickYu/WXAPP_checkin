@@ -1,0 +1,25 @@
+<view class='search'>
+  <input class="input-text" placeholder="搜索地址" confirm-type='search' value="{{userInput}}" bindinput='search' bindfocus='searchstart'/>
+  <view class='cancelbutton' bindtap='cancel'>清空</view>
+</view>
+<view class='adrlist' hidden='{{hideflag}}'>
+  <radio-group class="radio-group" bindchange="radioChangeAuto">
+    <label class="radio" wx:for="{{autolist}}" wx:key="*item">
+      <radio value="{{item.id}}|{{item.name}}"/>{{item.name}}     {{item.dis}}
+    </label>
+  </radio-group>
+</view>
+<view class='adrlist' hidden='{{!hideflag}}'>
+  <radio-group class="radio-group" bindchange="radioChangeSearch">
+    <label class="radio" wx:for="{{searchlist}}" wx:key="*item">
+      <radio value="{{item.id}}|{{item.name}}"/>{{item.name}}     {{item.dis}}
+    </label>
+  </radio-group>
+</view>
+<button class='confirmadr' bindtap='confirmadr' disabled='{{buttonflag}}'>确认地址</button>
+<view class='newaddress'>
+  <navigator url="addadr" class="navigator">
+    <view class="navigator-text">你在未曾探索过的地方？点击创建新地址</view>
+    <view class="navigator-arrow"></view>
+  </navigator>
+</view>

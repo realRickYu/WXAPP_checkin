@@ -8,54 +8,55 @@ Page({
         userInfo: {},
         logged: false,
         takeSession: false,
-        requestResult: ''
+        requestResult: '',
+        test:'test'
     },
 
     // 用户登录示例
-    login: function() {
-        if (this.data.logged) return
+    // login: function() {
+    //     if (this.data.logged) return
 
-        util.showBusy('正在登录')
-        var that = this
+    //     util.showBusy('正在登录')
+    //     var that = this
 
-        // 调用登录接口
-        qcloud.login({
-            success(result) {
-                if (result) {
-                  console.log(result)
-                    util.showSuccess('登录成功');
-                    that.setData({
-                        userInfo: result,
-                        logged: true
-                    })
-                } else {
-                    // 如果不是首次登录，不会返回用户信息，请求用户信息接口获取
-                    qcloud.request({
-                        url: config.service.requestUrl,
-                        login: true,
-                        success(result) {
-                            console.log(result.data.data)
-                            util.showSuccess('登录成功')
-                            that.setData({
-                                userInfo: result.data.data,
-                                logged: true
-                            })
-                        },
+    //     // 调用登录接口
+    //     qcloud.login({
+    //         success(result) {
+    //             if (result) {
+    //               console.log(result)
+    //                 util.showSuccess('登录成功');
+    //                 that.setData({
+    //                     userInfo: result,
+    //                     logged: true
+    //                 })
+    //             } else {
+    //                 // 如果不是首次登录，不会返回用户信息，请求用户信息接口获取
+    //                 qcloud.request({
+    //                     url: config.service.requestUrl,
+    //                     login: true,
+    //                     success(result) {
+    //                         console.log(result.data.data)
+    //                         util.showSuccess('登录成功')
+    //                         that.setData({
+    //                             userInfo: result.data.data,
+    //                             logged: true
+    //                         })
+    //                     },
 
-                        fail(error) {
-                            util.showModel('请求失败', error)
-                            console.log('request fail', error)
-                        }
-                    })
-                }
-            },
+    //                     fail(error) {
+    //                         util.showModel('请求失败', error)
+    //                         console.log('request fail', error)
+    //                     }
+    //                 })
+    //             }
+    //         },
 
-            fail(error) {
-                util.showModel('登录失败', error)
-                console.log('登录失败', error)
-            }
-        })
-    },
+    //         fail(error) {
+    //             util.showModel('登录失败', error)
+    //             console.log('登录失败', error)
+    //         }
+    //     })
+    // },
 
     bindGetUserInfo: function (e) {
       if (this.data.logged) return;
@@ -100,10 +101,12 @@ Page({
     },
 
     doLogin: function(options) {
+      console.log(options)
       var that = this;
 
       wx.login({
         success: function (loginResult) {
+          console.log(loginResult)
           var loginParams = {
             code: loginResult.code,
             encryptedData: options.encryptedData,
@@ -188,7 +191,7 @@ Page({
                 util.showBusy('正在上传')
                 var filePath = res.tempFilePaths[0]
                 console.log(filePath)
-
+                var test=that.data.test;
                 // 上传图片
                 wx.uploadFile({
                     url: config.service.uploadUrl,
@@ -199,7 +202,8 @@ Page({
                     },                   
                     formData:{
                       user_id: '123457',
-                      text:"天气不是很好13",
+                      //text:"天气不是很好13",
+                      text: test,
                       date:"2018-05-30",
                       prefer:"王"
                     },

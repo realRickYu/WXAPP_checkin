@@ -23,7 +23,25 @@ var config = {
         // 上传图片接口
         uploadUrl: `${host}/weapp/upload`,
 
-        queryUrl: `${host}/weapp/query`
+        queryUrl: `${host}/weapp/query`,
+
+        //上传新用户资料
+        adduserUrl: `${host}/weapp/adduser`,
+
+        //修改用户资料
+        modifyuserUrl: `${host}/weapp/modifyuser`,
+
+        //读最近的地点
+        getnearestadrUrl: `${host}/weapp/getnearestadr`,
+
+        //无图上传
+        comwithoutpicUrl: `${host}/weapp/comwithoutpic`,
+
+        //有图上传
+        comwithpicUrl: `${host}/weapp/comwithpic`,
+
+        //新建地点
+        newadrUrl: `${host}/weapp/newadr`,
     }
 };
 

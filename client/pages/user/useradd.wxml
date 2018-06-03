@@ -1,0 +1,15 @@
+<wxs src="common.wxs" module="checkEmail" />
+<form bindsubmit="formSubmit" bindreset="formReset">      
+  <input type="text" class="input-text" name="username" placeholder="昵称（方便朋友找到你，推荐使用真实姓名）"/>
+  <radio-group name="gender">
+    <label><radio value='male' />男</label>
+    <label><radio value='female'/>女</label>
+    <label><radio value='secret' checked='true'/>保密</label>
+  </radio-group>      
+  <input type="number" class="input-text" name="tel" placeholder="电话（选填）" />
+  <input type="text" class="input-text" name="email" placeholder="邮箱（选填）" bindinput='emailInput' bindfocus='emailFocus'/>
+  <input type="text" class="input-text" name="hometown" placeholder="家乡（选填）" />
+  <input type="text" class="input-text" name="signal" placeholder="签名（选填）" />
+  <button formType="submit" disabled="{{!checkEmail.validateEmail(email)&&emailstart}}">提交</button>      
+</form>
+<view class='warning' hidden="{{checkEmail.validateEmail(email)||(!emailstart)}}">邮箱格式错误</view>

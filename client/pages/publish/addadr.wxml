@@ -1,0 +1,26 @@
+<view class="showmap">
+  <map
+    style="width: 100%; height: 300px;"
+    latitude="{{latitude}}"
+    longitude="{{longitude}}"
+    markers="{{markers}}"
+    bindtap="choosetencent_add"
+    >
+  </map>
+</view>
+<view class='subtitle' hidden='{{!getloc}}'>点击地图确定您的位置</view>
+
+<view class='chooseaddress' hidden='{{getloc}}'>
+  <view class='subtitle'>选择位置名称</view>
+  <radio-group class='chooseaddress-radio' bindchange='radioChange'>
+    <label class='addaddress'>
+      <radio value="tencent" checked='true' class='radioadr' />
+      <text class='tencentadr'>{{tencentaddress}}</text>
+    </label>
+    <label class='addaddress'> 
+      <radio value="new" class='radioadr'/>
+      <input class="input-text" bindinput="bindKeyInput" placeholder="不叫这个名字？请记录这个未被腾讯探索过的地方"/>
+    </label>
+  </radio-group>
+  <button class='confirmbutton' bindtap='confirm_add'>提交</button>
+</view>

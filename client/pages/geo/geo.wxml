@@ -1,0 +1,7 @@
+<form bindsubmit="formSubmit" bindreset="formReset">          
+  <input type="number" class="input-text" name="tel" placeholder="电话" />
+  <input type="text" class="input-text" name="email" placeholder="邮箱" />
+  <input type="text" class="input-text" name="hometown" placeholder="家乡" />
+  <input type="text" class="input-text" name="signal" placeholder="签名" />
+  <button formType="submit">提交</button>      
+</form>

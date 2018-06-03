@@ -1,0 +1,44 @@
+<view class='userinput'>
+  <view class="comment">
+    <textarea bindinput="bindKeyInput" placeholder="你觉得这个地方怎么样？" auto-focus='true' />
+  </view>
+  <view class="publicpublisher">
+    <switch type="checkbox" bindchange="switchChange"> 仅公开给好友 </switch>
+  </view>
+  <view class="publishbutton">
+    <button class='cancelbutton' type="default" size="mini" bindtap='cancel'>取消</button>
+    <button class='yesbutton' type="primary" size="mini" bindtap='publish'>确定</button>
+  </view>
+  <view class="weui-cells">
+    <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <view class="weui-uploader">
+          <view class="weui-uploader__hd">
+            <image class="cameraicon" src='camera.png' style="width: 35px; height: 35px;" mode="aspectFit"></image>
+            <view class="weui-uploader__info">{{imageList.length}}/9</view>
+          </view>
+          <view class="weui-uploader__bd">
+            <view class="weui-uploader__files">
+              <block wx:for="{{imageList}}" wx:for-item="image" wx:key="*this">
+                <view class="weui-uploader__file">
+                  <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="previewImage"></image>
+                </view>
+              </block>
+            </view>
+            <view class="weui-uploader__input-box">
+              <view class="weui-uploader__input" bindtap="chooseImage"></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='chooseaddress'>
+  <navigator url="databaseadr" class="navigator">
+    <view class="navigator-text">{{databaseaddress}}</view>
+    <view class="navigator-arrow"></view>
+  </navigator>
+</view>
+<view class='hint'>定位不准？下拉刷新试试</view>
