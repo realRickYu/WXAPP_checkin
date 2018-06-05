@@ -39,7 +39,7 @@ Page({
           header: { 'Content-Type': 'application/json' },
           success: function (res) {
             that.setData({
-              databaseaddress: res.data.result.nearestadr,
+              databaseaddress: res.data.result.adrname,
               adrid: res.data.result.adrid
             })
           }
@@ -94,7 +94,7 @@ Page({
           header: { 'Content-Type': 'application/json' },
           success: function (res) {
             that.setData({
-              databaseaddress: res.data.result.nearestadr,
+              databaseaddress: res.data.result.adrname,
               adrid: res.data.result.adrid
             })
           }
@@ -116,6 +116,7 @@ Page({
   chooseImage:function(){
     var that = this
     wx.chooseImage({
+      count: 1, 
       success: function(res) {
         console.log(res)
         that.setData({
@@ -198,7 +199,7 @@ Page({
       //有图上传
       wx.uploadFile({
         url: config.service.comwithpicUrl,
-        filePath: imagelist,
+        filePath: imagelist[0],
         name: sendtime,
         formData: {
           id: app.globalData.userId,
