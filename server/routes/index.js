@@ -17,6 +17,8 @@ router.get('/login', authorizationMiddleware, controllers.login)
 router.get('/user', validationMiddleware, controllers.user)
 
 router.get('/query', validationMiddleware, controllers.query)
+router.get('/adduser', validationMiddleware, controllers.adduser)
+router.get('/id', validationMiddleware, controllers.id)
 
 // --- 图片上传 Demo --- //
 // 图片上传接口，小程序端可以直接将 url 填入 wx.uploadFile 中

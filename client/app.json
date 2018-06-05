@@ -1,9 +1,10 @@
 {
   "pages":[
     "pages/user/useradd",
-    "pages/user/usermodify",
-    "pages/publish/publish",
     "pages/index/index",
+    
+    "pages/user/usermodify",
+    "pages/publish/publish",   
     "pages/publish/databaseadr",
     "pages/publish/addadr"
   ],

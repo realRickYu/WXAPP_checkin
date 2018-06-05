@@ -24,6 +24,8 @@ Page({
   formSubmit: function (e) {
     var that = this;
     var formData = e.detail.value; //获取表单所有input的值
+    console.log(formData)
+    console.log(getApp().globalData.userId)
     //但用户名包含非法字符的问题还需要解决
     if (formData.username == '')
     {
@@ -35,12 +37,18 @@ Page({
       return;
     }
     //上传新用户资料
-    wx.request({
+    qcloud.request({
       url: config.service.adduserUrl,
       data: {
-        id: app.globalData.userId,
-        formData
+        id: getApp().globalData.userId,
+        username:formData.username,
+        tel: formData.tel,
+        signal: formData.signal,
+        hometown: formData.hometown,
+        gender: formData.gender,
+        email: formData.email
       },
+      login:true,
       header: { 'Content-Type': 'application/json' },
       success: function (res) {
         console.log(res.data)

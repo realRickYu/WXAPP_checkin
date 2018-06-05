@@ -116,7 +116,7 @@ Page({
   chooseImage:function(){
     var that = this
     wx.chooseImage({
-      count: 1, 
+      count: 1,
       success: function(res) {
         console.log(res)
         that.setData({

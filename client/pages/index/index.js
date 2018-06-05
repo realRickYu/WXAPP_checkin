@@ -69,6 +69,8 @@ Page({
       // 查看是否授权
       wx.getSetting({
         success: function (res) {
+          console.log('success')
+          console.log(res)
           if (res.authSetting['scope.userInfo']) {
 
             // 检查登录是否过期
@@ -83,6 +85,8 @@ Page({
               },
 
               fail: function () {
+                console.log('fail')
+                console.log(res)
                 qcloud.clearSession();
                 // 登录态已过期，需重新登录
                 var options = {
@@ -136,12 +140,14 @@ Page({
 
     // 切换是否带有登录态
     switchRequestMode: function (e) {
-        this.setData({
-            takeSession: e.detail.value
+       wx.navigateTo({
+             url:'../user/useradd' })
+        // this.setData({
+        //     takeSession: e.detail.value
             
-        })
-        console.log('开关测试' + e.detail.value)
-        this.doRequest()
+        // })
+        // console.log('开关测试' + e.detail.value)
+        // this.doRequest()
     },
 
     doRequest: function () {
