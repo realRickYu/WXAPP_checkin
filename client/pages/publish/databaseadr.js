@@ -26,10 +26,36 @@ Page({
         that.setData({
           latitude: res.latitude,
           longitude: res.longitude,
+        }),
+        //上传坐标值换回20个地名的列表
+        qcloud.request({
+          url: config.service.suggestedadrUrl,
+          data: {
+            latitude: res.latitude,
+            longitude: res.longitude,
+          },
+          login: true,
+          header: { 'Content-Type': 'application/json' },
+          success: function (res) {
+            console.log(res.data)
+            that.setData({
+              autolist: res.data.autolist
+            })
+            //var autolist = res.data.autolist;
+            // for (var i in autolist)
+            // {
+            //   var newarray=[{
+            //     id:autolist[i].id,
+            //     name: autolist[i].name,
+            //     dis: autolist[i].dis,
+            //   }];
+            //   that.setData({
+            //     'autolist': that.data.autolist.concat(newarray)
+            //   })
+            // }
+          }
         })
-      },
-      //上传坐标值换回20个地名的列表
-
+      }
     })
   },
   searchstart: function (e) {
@@ -38,8 +64,23 @@ Page({
     })
   },
   search:function(e){
+    var that = this;
+    var userInput = e.detail.value;
     //清空之前的列表，上传该地址名称，返回的值建议头匹配
-
+    qcloud.request({
+      url: config.service.searchadrUrl,
+      data: {
+        adrname: userInput,
+      },
+      login: true,
+      header: { 'Content-Type': 'application/json' },
+      success: function (res) {
+        console.log(res.data)
+        that.setData({
+          searchlist: res.data.searchlist
+        })
+      }
+    })
   },
   radioChangeAuto: function (e) {
     var that = this

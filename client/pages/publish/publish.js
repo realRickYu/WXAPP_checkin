@@ -136,11 +136,22 @@ Page({
   },
   cancel:function(){
     wx.switchTab({
-      url: '../geo/geo',
+      url: '../timeline/timeline',
     })
   },
   publish:function(){
     var that = this;
+    var adrname = that.data.databaseaddress;
+    if (adrname =='正在定位...')
+    {
+      wx.showToast({
+        title: '还没找到您的位置，建议点击“正在定位...”手动选择',
+        icon: 'none',
+        duration: 1500
+      })
+      return;
+    }
+
     var comment = that.data.inputValue;
     if (comment == '') {
       wx.showToast({
@@ -186,7 +197,7 @@ Page({
       qcloud.request({
         url: config.service.comwithoutpicUrl,
         data: {
-          id: app.globalData.userId,
+          id: getApp().globalData.userId,
           adrid: adrid,
           sendtime: sendtime,
           text:input,
@@ -194,6 +205,16 @@ Page({
         },
         login: true,
         header: { 'Content-Type': 'application/json' },
+        success: function (res) {
+          wx.redirectTo({ url:'../place/placeinfo?adrid='+adrid})
+        },
+        fail: function ({ errMsg }) {
+          wx.showToast({
+            title: '抱歉，发送失败',
+            icon: 'none',
+            duration: 1500
+          })
+        }
       })
     } else
     {
@@ -203,7 +224,7 @@ Page({
         filePath: imagelist[0],
         name: sendtime,
         formData: {
-          id: app.globalData.userId,
+          id: getApp().globalData.userId,
           adrid: adrid,
           sendtime: sendtime,
           text: input,
@@ -211,9 +232,15 @@ Page({
         },
         success: function (res) {
           console.log('uploadImage success, res is:', res)
+          wx.redirectTo({ url: '../place/placeinfo?adrid=' + adrid })
         },
         fail: function ({ errMsg }) {
           console.log('uploadImage fail, errMsg is', errMsg)
+          wx.showToast({
+            title: '抱歉，发送失败',
+            icon: 'none',
+            duration: 1500
+          })
         }
       })
     }

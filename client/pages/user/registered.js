@@ -33,7 +33,7 @@ Page({
         if (register == 'false') {
           wx.navigateTo({ url: "useradd" })
         } else if (register == 'true') {
-          wx.navigateTo({ url: "../timeline/timeline" })
+          wx.switchTab({ url: "../timeline/timeline" })
         }
       }
     })

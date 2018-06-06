@@ -1,9 +1,4 @@
-var qcloud = require('../../vendor/wafer2-client-sdk/index')
-var config = require('../../config')
-var util = require('../../utils/util.js')
-
-var app = getApp()
-// pages/timeline/timeline.js
+// pages/place/placehomepage.js
 Page({
 
   /**
