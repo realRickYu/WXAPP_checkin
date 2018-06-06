@@ -16,20 +16,21 @@ Page({
   onLoad: function () {
     var that = this
     //上传userID 换取用户资料
-    wx.request({
+    qcloud.request({
       url: config.service.getuserinfoUrl,
       data: {
-        id: app.globalData.userId
+        id: getApp().globalData.userId,
       },
+      login: true,
       header: { 'Content-Type': 'application/json' },
       success: function (res) {
         that.setData({
-          username: res.data.result.username,
-          gender: res.data.result.gender,
-          tel: res.data.result.tel,
-          email: res.data.result.email,
-          hometown: res.data.result.hometown,
-          signal: res.data.result.signal,
+          username: res.data.username,
+          gender: res.data.gender,
+          tel: res.data.tel,
+          email: res.data.email,
+          hometown: res.data.hometown,
+          signal: res.data.signal,
         })
       }
     })
@@ -60,12 +61,18 @@ Page({
       return;
     }
     //修改用户资料
-    wx.request({
+    qcloud.request({
       url: config.service.modifyuserUrl,
       data: {
         id: app.globalData.userId,
-        formData
+        username: formData.username,
+        tel: formData.tel,
+        signal: formData.signal,
+        hometown: formData.hometown,
+        gender: formData.gender,
+        email: formData.email
       },
+      login: true,
       header: { 'Content-Type': 'application/json' },
       success: function (res) {
         console.log(res.data)

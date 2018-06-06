@@ -44,6 +44,55 @@ var config = {
 
         //新建地点
         newadrUrl: `${host}/weapp/newadr`,
+
+        //判断是否注册过
+        registeredUrl: `${host}/weapp/registered`,
+
+        //获取用户资料
+        getuserinfoUrl: `${host}/weapp/getuserinfo`,
+
+        //获取坐标附近的地址名称（最多20个）
+        suggestedadrUrl: `${host}/weapp/suggestedadr`,
+
+        //搜索数据库中有的地址名称
+        searchadrUrl: `${host}/weapp/searchadr`,
+
+        //地址信息
+        adrinfoUrl: `${host}/weapp/adrinfo`,
+
+        //时间线
+        timelineUrl: `${host}/weapp/timeline`,
+
+        //个人历史
+        personalUrl: `${host}/weapp/personal`,
+
+        //搜索用户
+        findpersonUrl: `${host}/weapp/findperson`,
+
+        //其他人的个人主页
+        otherpersonUrl: `${host}/weapp/otherperson`,
+
+        //两个用户是否为好友
+        relationUrl: `${host}/weapp/relation`,
+
+        //地址名称的主页
+        placeUrl: `${host}/weapp/place`,
+
+        //查看收件箱
+        inboxUrl: `${host}/weapp/inbox`,
+
+        //收件箱更新
+        inboxupdateUrl: `${host}/weapp/inboxupdate`,
+
+        //加好友申请
+        addfriendUrl: `${host}/weapp/addfriend`,
+
+        //同意成为好友
+        agreefriendUrl: `${host}/weapp/agreefriend`,
+
+        //点赞
+        likeUrl: `${host}/weapp/like`,
+        
     }
 };
 

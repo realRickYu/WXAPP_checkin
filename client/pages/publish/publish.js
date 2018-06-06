@@ -30,17 +30,18 @@ Page({
         var lati = res.latitude
         var longi = res.longitude
         //向服务器上传经纬度换离当前位置最近的自建地址
-        wx.request({
+        qcloud.request({
           url: config.service.getnearestadrUrl,
           data: {
             latitude: lati,
             longitude: longi
           },
+          login: true,
           header: { 'Content-Type': 'application/json' },
           success: function (res) {
             that.setData({
-              databaseaddress: res.data.result.adrname,
-              adrid: res.data.result.adrid
+              databaseaddress: res.data.adrname,
+              adrid: res.data.adrid
             })
           }
         })
@@ -85,17 +86,18 @@ Page({
         var lati = res.latitude
         var longi = res.longitude
         //向服务器上传经纬度换离当前位置最近的自建地址
-        wx.request({
+        qcloud.request({
           url: config.service.getnearestadrUrl,
           data: {
             latitude: lati,
             longitude: longi
           },
+          login: true,
           header: { 'Content-Type': 'application/json' },
           success: function (res) {
             that.setData({
-              databaseaddress: res.data.result.adrname,
-              adrid: res.data.result.adrid
+              databaseaddress: res.data.adrname,
+              adrid: res.data.adrid
             })
           }
         })
@@ -155,17 +157,18 @@ Page({
       var lati = that.data.newAdrLati;
       var longi = that.data.newAdrLongi;
       var adrname = that.data.databaseaddress;
-      wx.request({
+      qcloud.request({
         url: config.service.newadrUrl,
         data: {
           latitude: lati,
           longitude: longi,
           adrname: adrname
         },
+        login: true,
         header: { 'Content-Type': 'application/json' },
         success: function (res) {
           that.setData({
-            adrid: res.data.result.adrid
+            adrid: res.data.adrid
           })
         }
       })
@@ -175,24 +178,22 @@ Page({
     var imagelist = that.data.imageList;
     var adrid = that.data.adrid;
     var input = that.data.inputValue;
+    var publicpublish = that.data.publicpublish;
     var sendtime = new Date();
     if (imagelist.length==0)
     {
       //无图上传
-      wx.request({
+      qcloud.request({
         url: config.service.comwithoutpicUrl,
         data: {
           id: app.globalData.userId,
           adrid: adrid,
           sendtime: sendtime,
           text:input,
+          publicpublish: publicpublish
         },
+        login: true,
         header: { 'Content-Type': 'application/json' },
-        // success: function (res) {
-        //   that.setData({
-        //     databaseaddress: res.data.result.nearestadr,
-        //   })
-        // }
       })
     } else
     {
@@ -206,6 +207,7 @@ Page({
           adrid: adrid,
           sendtime: sendtime,
           text: input,
+          publicpublish: publicpublish
         },
         success: function (res) {
           console.log('uploadImage success, res is:', res)

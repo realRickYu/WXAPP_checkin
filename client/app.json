@@ -1,12 +1,13 @@
 {
   "pages":[
-    "pages/user/useradd",
-    "pages/index/index",
-    
+    "pages/user/registered",
+    "pages/user/useradd",    
     "pages/user/usermodify",
-    "pages/publish/publish",   
+    "pages/publish/publish",
     "pages/publish/databaseadr",
-    "pages/publish/addadr"
+    "pages/publish/addadr",
+    "pages/timeline/timeline",
+    "pages/personal/personal"
   ],
   "window":{
     "backgroundColor":"#F6F6F6",
@@ -22,7 +23,7 @@
     "backgroundColor": "#ffffff",
     "list": [
       {
-        "pagePath": "pages/user/usermodify",
+        "pagePath": "pages/personal/personal",
         "text": "个人"
       },
       {
@@ -30,7 +31,7 @@
         "text": "发布"
       },
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/timeline/timeline",
         "text": "测试"
       }
     ]

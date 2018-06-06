@@ -9,7 +9,7 @@ Page({
     adrinfo: '',
     hideflag: false,
     buttonflag:true,
-    value:'',
+    userInput:'',
     autolist: [
       {id:1,name:'自动测试1',dis:'0.1km'},
       { id: 2, name: '自动测试2', dis: '0.2km'},
