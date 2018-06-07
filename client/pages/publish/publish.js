@@ -152,15 +152,6 @@ Page({
       return;
     }
 
-    var comment = that.data.inputValue;
-    if (comment == '') {
-      wx.showToast({
-        title: '请不要闷声大发财',
-        icon: 'none',
-        duration: 1500
-      })
-      return;
-    }
     //如果使用新建地点，先上传新地点，新地点的ID由后端分配并返回
     var adrsource = that.data.source;
     if (adrsource == 'useradded')

@@ -1,2 +1,17 @@
 <!--pages/timeline/timeline.wxml-->
-<text>pages/timeline/timeline.wxml</text>
+<view class="search">  
+  <view class="search-result">  
+    <block class="result-item" wx:for="{{list}}" wx:key="*item" >  
+      <view class='username'>{{item.username}}</view>
+      <view class='placename'>{{item.adrname}}</view>
+      <view class='sendtime'>{{item.sendtime}}</view>
+      <view class='text' wx:if='{{item.textvalue.length!=0}}'>{{item.textvalue}}</view>
+      <image class="weui-uploader__img" wx:if='{{item.imgUrl.length!=0}}' src="{{item.imgUrl}}" data-src="{{item.imgUrl}}" bindtap="previewImage"></image>
+      <image class="like" wx:if='{{item.liked=="true"}}' src='heart_true.png' style="width: 35px; height: 35px;" mode="aspectFit" data-index='{{index}}' bindtap="unlike"></image>
+      <image class="like" wx:if='{{item.liked=="false"}}' src='heart_false.png' style="width: 35px; height: 35px;" mode="aspectFit" data-index='{{index}}' bindtap="like"></image>
+      <view class='likenumber'>*{{item.likenumber}}</view>
+    </block>  
+    <view class="loading" hidden="{{!searchLoading}}">正在载入更多...</view>  
+    <view class="loading complete" hidden="{{!searchLoadingComplete}}">没有了</view>     
+  </view>  
+</view>  

@@ -1,5 +1,4 @@
 <!--pages/place/placeinfo.wxml-->
-<text>pages/place/placeinfo.wxml</text>
 <view class='success'>签到成功</view>
 <view class='placename'>{{adrname}}</view>
 <view class='mayor'>{{mayor[0].username}}是此地代表，30天里在此地身经百战{{mayor[0].times}}次</view>
