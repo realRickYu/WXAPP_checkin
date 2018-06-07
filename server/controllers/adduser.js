@@ -27,15 +27,26 @@ module.exports = async (ctx, next) => {
 
 
   const { mysql } = require('../qcloud')
-  await mysql('user').insert({
-    open_id: ctx.request.query.id,
-    user_name: ctx.request.query.username, 
-    gender: ctx.request.query.gender,
-    phone: ctx.request.query.tel, 
-    mail: ctx.request.query.email, 
-    hometown: ctx.request.query.hometown,
-    signature: ctx.request.query.signal,
-  }).then(res => {
-  ctx.state.data = res
-})
+  // await mysql('user').select('user_name', 'mail').where({ open_id: 123456 }).then(res => {
+  //   ctx.state.data = res
+  //   //ctx.body ={phone:ctx.request.query.phone,user:ctx.request.query.user}
+  // })
+  await mysql('user').select('id').where({ open_id: ctx.request.query.id}).then(res=>{
+    if (res.length>0){
+      ctx.body = -1
+    }else{
+       mysql('user').insert({
+        open_id: ctx.request.query.id,
+        user_name: ctx.request.query.username,
+        gender: ctx.request.query.gender,
+        phone: ctx.request.query.tel,
+        mail: ctx.request.query.email,
+        hometown: ctx.request.query.hometown,
+        signature: ctx.request.query.signal,
+      }).then(res => {
+        ctx.body = 0        
+      })
+    }
+  })
+
 }

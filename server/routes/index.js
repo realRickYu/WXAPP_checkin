@@ -15,10 +15,35 @@ const { auth: { authorizationMiddleware, validationMiddleware } } = require('../
 router.get('/login', authorizationMiddleware, controllers.login)
 // 用户信息接口（可以用来验证登录态）
 router.get('/user', validationMiddleware, controllers.user)
+router.get('/registered', validationMiddleware, controllers.registeredUrl)
+router.get('/addfriend', validationMiddleware, controllers.addfriend)
+router.get('/agreefriend', validationMiddleware, controllers.agreefriend)
+router.get('/like', validationMiddleware, controllers.like)
+router.get('/timeline', validationMiddleware, controllers.timeline)
+router.get('/personal', validationMiddleware, controllers.personal)
+router.get('/otherperson', validationMiddleware, controllers.otherperson)
+router.get('/inbox', validationMiddleware, controllers.inbox)
+router.get('/inboxupdate', validationMiddleware, controllers.inboxupdate)
+router.get('/place', validationMiddleware, controllers.place)
+router.get('/findperson', validationMiddleware, controllers.findperson)
+router.get('/relation', validationMiddleware, controllers.relation)
+router.get('/getuserinfo', validationMiddleware, controllers.getuserinfoUrl)
+router.get('/suggestedadr', validationMiddleware, controllers.suggestedadr)
+router.get('/adrinfo', validationMiddleware, controllers.adrinfo)
+router.get('/adinfo', validationMiddleware, controllers.adinfo)
+router.get('/likegroup', validationMiddleware, controllers.likegroup)
+router.get('/adrinfofriend', validationMiddleware, controllers.adrinfofriend)
+router.get('/searchadr', validationMiddleware, controllers.searchadr)
 
 router.get('/query', validationMiddleware, controllers.query)
-router.get('/adduser', validationMiddleware, controllers.adduser)
-router.get('/id', validationMiddleware, controllers.id)
+
+router.get('/adduser', validationMiddleware, controllers.adduser)//ok
+router.get('/modifyuser', validationMiddleware, controllers.modifyuser)
+router.get('/getnearestadr', validationMiddleware, controllers.getnearestadr)//ok
+router.get('/comwithoutpic', validationMiddleware, controllers.comwithoutpic)//ok
+router.post('/comwithpic', controllers.comwithpic)//ok
+router.get('/newadr', validationMiddleware, controllers.newadr)//ok
+
 
 // --- 图片上传 Demo --- //
 // 图片上传接口，小程序端可以直接将 url 填入 wx.uploadFile 中
