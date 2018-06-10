@@ -11,8 +11,8 @@ Page({
    */
   data: {
     adrid:'',
-    adrname:'二餐',
-    mayor: [{userid:'1234',username:'大王',times:'5'}],
+    adrname:'',
+    mayor:[],
     friends: [{ userid: '1234', username: '大王' }, { userid: '12345', username: '小王' },]
   },
 
@@ -26,6 +26,19 @@ Page({
       adrid: options.adrid,
     })
     qcloud.request({
+      url: config.service.adinfoUrl,
+      data: {
+        adrid: options.adrid,
+      },
+      login: true,
+      header: { 'Content-Type': 'application/json' },
+      success: function (res) {
+        that.setData({
+          adrname: res.data[0].place_name ,
+        })
+      }
+    })
+    qcloud.request({
       url: config.service.adrinfoUrl,
       data: {
         adrid: options.adrid,
@@ -34,16 +47,28 @@ Page({
       header: { 'Content-Type': 'application/json' },
       success: function (res) {
         that.setData({
-          adrname: res.data.adrname,
-          mayor: res.data.mayor,
-          friend: res.data.friend
+          mayor: res.data
+        })
+      }
+    })
+    qcloud.request({
+      url: config.service.adrinfofriendUrl,
+      data: {
+        adrid: options.adrid,
+        id: getApp().globalData.userId
+      },
+      login: true,
+      header: { 'Content-Type': 'application/json' },
+      success: function (res) {
+        that.setData({
+          friends: res.data
         })
       }
     })
   },
   plase_homepage:function(){
     wx.reLaunch({
-      url: 'placehomepage?adrid=' + adrid
+      url: 'placehomepage?adrid=' + this.data.adrid
     })
   },
   homepage: function () {

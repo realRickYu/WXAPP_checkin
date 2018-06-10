@@ -1,15 +1,17 @@
 <!--pages/timeline/timeline.wxml-->
+<view class='addfriend' bind></view>
+<navigator class='addfriend' url='../search/searchusers'>搜索新朋友</navigator>
 <view class="search">  
   <view class="search-result">  
     <block class="result-item" wx:for="{{list}}" wx:key="*item" >  
-      <view class='username'>{{item.username}}</view>
-      <view class='placename'>{{item.adrname}}</view>
+      <view class='username'>{{item.user_name}}</view>
+      <view class='placename'>{{item.place_name}}</view>
       <view class='sendtime'>{{item.sendtime}}</view>
-      <view class='text' wx:if='{{item.textvalue.length!=0}}'>{{item.textvalue}}</view>
-      <image class="weui-uploader__img" wx:if='{{item.imgUrl.length!=0}}' src="{{item.imgUrl}}" data-src="{{item.imgUrl}}" bindtap="previewImage"></image>
-      <image class="like" wx:if='{{item.liked=="true"}}' src='heart_true.png' style="width: 35px; height: 35px;" mode="aspectFit" data-index='{{index}}' bindtap="unlike"></image>
-      <image class="like" wx:if='{{item.liked=="false"}}' src='heart_false.png' style="width: 35px; height: 35px;" mode="aspectFit" data-index='{{index}}' bindtap="like"></image>
-      <view class='likenumber'>*{{item.likenumber}}</view>
+      <view class='text' wx:if='{{item.textvalue.length!=0}}'>{{item.text}}</view>
+      <image class="weui-uploader__img" wx:if='{{item.image!=null}}' src="{{item.image}}" data-src="{{item.image}}" style="width: 200px; height: 200px;" mode="aspectFit" bindtap="previewImage"></image>
+      <image class="like" wx:if='{{item.liked}}' src='../../common/heart_true.png' style="width: 35px; height: 35px;" mode="aspectFit"></image>
+      <image class="like" wx:if='{{!item.liked}}' src='../../common/heart_false.png' style="width: 35px; height: 35px;" mode="aspectFit" data-index='{{index}}' bindtap="like"></image>
+      <view class='likenumber' wx:if='{{item.likenumber!=0}}'>{{item.likenumber}}</view>
     </block>  
     <view class="loading" hidden="{{!searchLoading}}">正在载入更多...</view>  
     <view class="loading complete" hidden="{{!searchLoadingComplete}}">没有了</view>     

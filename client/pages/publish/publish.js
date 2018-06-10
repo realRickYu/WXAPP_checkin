@@ -9,7 +9,7 @@ Page({
     adrid: '',
     newAdrLati:'',
     newAdrLongi: '',
-    publicpublish:false,
+    publicpublish:true,
     imageList: [],
     inputValue: '',
     source:'database'
@@ -23,6 +23,7 @@ Page({
     var that = this
     wx.getLocation({
       success: function(res) {
+        console.log(res)
         that.setData({
           latitude : res.latitude,
           longitude : res.longitude
@@ -39,9 +40,10 @@ Page({
           login: true,
           header: { 'Content-Type': 'application/json' },
           success: function (res) {
+            console.log(res)
             that.setData({
-              databaseaddress: res.data.adrname,
-              adrid: res.data.adrid
+              databaseaddress: res.data[0].place_name,
+              adrid: res.data[0].id
             })
           }
         })
@@ -50,11 +52,12 @@ Page({
   },
   onShow: function (){
     //读跳转后传回的数据
+    var that=this;
     var source = (wx.getStorageSync('source') || 'database' );
-    var adrname = (wx.getStorageSync('adrname') ||'正在定位...');
+    var adrname = (wx.getStorageSync('adrname') ||that.data.databaseaddress);
     if (source == 'database')
     {
-      var adrid = (wx.getStorageSync('adrid') || '');
+      var adrid = (wx.getStorageSync('adrid') || that.data.adrid);
       this.setData({
         source: source,
         databaseaddress: adrname,
@@ -96,8 +99,8 @@ Page({
           header: { 'Content-Type': 'application/json' },
           success: function (res) {
             that.setData({
-              databaseaddress: res.data.adrname,
-              adrid: res.data.adrid
+              databaseaddress: res.data[0].place_name,
+              adrid: res.data[0].id
             })
           }
         })
@@ -112,7 +115,7 @@ Page({
   switchChange: function (e) {
     var that = this
     that.setData({
-      publicpublish: e.detail.value
+      publicpublish: !e.detail.value
     })
   },
   chooseImage:function(){
@@ -138,6 +141,68 @@ Page({
     wx.switchTab({
       url: '../timeline/timeline',
     })
+  },
+  upload: function () {
+    var that = this;
+    //上传状态至服务器(分有无照片两种)
+    var imagelist = that.data.imageList;
+    var adrid = that.data.adrid;
+    var input = that.data.inputValue;
+    var publicpublish = that.data.publicpublish;
+    var sendtime = new Date().getTime();
+    if (imagelist.length == 0) {
+      //无图上传
+      qcloud.request({
+        url: config.service.comwithoutpicUrl,
+        data: {
+          id: getApp().globalData.userId,
+          adrid: adrid,
+          sendtime: sendtime,
+          text: input,
+          publicpublish: publicpublish
+        },
+        login: true,
+        header: { 'Content-Type': 'application/json' },
+        success: function (res) {
+          wx.redirectTo({ url: '../place/placeinfo?adrid=' + adrid })
+        },
+        fail: function ({ errMsg }) {
+          wx.showToast({
+            title: '抱歉，发送失败',
+            icon: 'none',
+            duration: 1500
+          })
+        }
+      })
+    } else {
+      //有图上传
+      wx.uploadFile({
+        url: config.service.comwithpicUrl,
+        filePath: imagelist[0],
+        name: 'file',
+        formData: {
+          id: getApp().globalData.userId,
+          adrid: adrid,
+          sendtime: sendtime,
+          text: input,
+          publicpublish: publicpublish
+        },
+        login: true,
+        header: { 'Content-Type': 'application/json' },
+        success: function (res) {
+          console.log('uploadImage success, res is:', res)
+          wx.redirectTo({ url: '../place/placeinfo?adrid=' + adrid })
+        },
+        fail: function ({ errMsg }) {
+          console.log('uploadImage fail, errMsg is', errMsg)
+          wx.showToast({
+            title: '抱歉，发送失败',
+            icon: 'none',
+            duration: 1500
+          })
+        }
+      })
+    }
   },
   publish:function(){
     var that = this;
@@ -169,71 +234,18 @@ Page({
         login: true,
         header: { 'Content-Type': 'application/json' },
         success: function (res) {
+          console.log(res.data)
           that.setData({
-            adrid: res.data.adrid
+            adrid: res.data[0]["max(`id`)"]
           })
-        }
-      })
-    }
-
-    //上传状态至服务器(分有无照片两种)
-    var imagelist = that.data.imageList;
-    var adrid = that.data.adrid;
-    var input = that.data.inputValue;
-    var publicpublish = that.data.publicpublish;
-    var sendtime = new Date();
-    if (imagelist.length==0)
-    {
-      //无图上传
-      qcloud.request({
-        url: config.service.comwithoutpicUrl,
-        data: {
-          id: getApp().globalData.userId,
-          adrid: adrid,
-          sendtime: sendtime,
-          text:input,
-          publicpublish: publicpublish
-        },
-        login: true,
-        header: { 'Content-Type': 'application/json' },
-        success: function (res) {
-          wx.redirectTo({ url:'../place/placeinfo?adrid='+adrid})
-        },
-        fail: function ({ errMsg }) {
-          wx.showToast({
-            title: '抱歉，发送失败',
-            icon: 'none',
-            duration: 1500
-          })
+          that.upload()
         }
       })
     } else
     {
-      //有图上传
-      wx.uploadFile({
-        url: config.service.comwithpicUrl,
-        filePath: imagelist[0],
-        name: sendtime,
-        formData: {
-          id: getApp().globalData.userId,
-          adrid: adrid,
-          sendtime: sendtime,
-          text: input,
-          publicpublish: publicpublish
-        },
-        success: function (res) {
-          console.log('uploadImage success, res is:', res)
-          wx.redirectTo({ url: '../place/placeinfo?adrid=' + adrid })
-        },
-        fail: function ({ errMsg }) {
-          console.log('uploadImage fail, errMsg is', errMsg)
-          wx.showToast({
-            title: '抱歉，发送失败',
-            icon: 'none',
-            duration: 1500
-          })
-        }
-      })
+      that.upload()
     }
+
+
   },
 }) 

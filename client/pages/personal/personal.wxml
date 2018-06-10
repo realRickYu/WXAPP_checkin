@@ -1,13 +1,28 @@
 <!--pages/personal/personal.wxml-->
+<image class="inboxicon" src='../../common/inbox_unread.png' style="width: 35px; height: 35px;" mode="aspectFit"></image>
+<view class='inbox' bindtap='checkinbox' wx:if='{{newmessage}}'>您有新消息，请查收（麻烦变成红字）</view>
+<view class='inbox' bindtap='checkinbox' wx:if='{{!newmessage}}'>收件箱</view>
+<view class='modifyuser' bindtap='modifyuser'>修改资料</view>
+<view class="map">
+  <map
+    style="width: 100%; height: 300px;"
+    latitude="{{latitude}}"
+    longitude="{{longitude}}"
+    markers="{{markers}}"
+    >
+  </map>
+</view>
 
 <view class="search">  
   <view class="search-result">  
     <block class="result-item" wx:for="{{list}}" wx:key="*item" >  
-      <view class='username'>{{item.username}}</view>
-      <view class='placename'>{{item.adrname}}</view>
+      <view class='username'>{{item.user_name}}</view>
+      <view class='placename'>{{item.place_name}}</view>
       <view class='sendtime'>{{item.sendtime}}</view>
-      <view class='text' wx:if='{{item.textvalue.length!=0}}'>{{item.textvalue}}</view>
-      <image class="weui-uploader__img" wx:if='{{item.imgUrl.length!=0}}' src="{{item.imgUrl}}" data-src="{{item.imgUrl}}" bindtap="previewImage"></image>
+      <view class='text' wx:if='{{item.textvalue.length!=0}}'>{{item.text}}</view>
+      <image class="like" wx:if='{{item.liked}}' src='../../common/heart_true.png' style="width: 35px; height: 35px;" mode="aspectFit"></image>
+      <image class="like" wx:if='{{!item.liked}}' src='../../common/heart_false.png' style="width: 35px; height: 35px;" mode="aspectFit" data-index='{{index}}' bindtap="like"></image>
+      <view class='likenumber' wx:if='{{item.likenumber!=0}}'>{{item.likenumber}}</view>
     </block>  
     <view class="loading" hidden="{{!searchLoading}}">正在载入更多...</view>  
     <view class="loading complete" hidden="{{!searchLoadingComplete}}">没有了</view>     

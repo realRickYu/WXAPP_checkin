@@ -1,0 +1,15 @@
+<!--pages/personal/inbox.wxml-->
+<view class="search">  
+  <view class="search-result">  
+    <block class="result-item" wx:for="{{list}}" wx:key="*item" >  
+      <block class='result' wx:if='{{item.type=="like"}}'>
+        <view>{{item.user_name}}给你点了赞</view>
+      </block>
+      <block class='result' wx:if='{{item.type=="friend"}}'>
+        <view>{{item.user_name}}请求成为你的好友</view>
+        <button bindtap='agree' data-index='{{index}}'>同意</button>
+        <button bindtap='disagree' data-index='{{index}}'>拒绝</button>
+      </block>
+    </block>  
+  </view>  
+</view>

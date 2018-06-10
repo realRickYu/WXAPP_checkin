@@ -25,12 +25,12 @@ Page({
       header: { 'Content-Type': 'application/json' },
       success: function (res) {
         that.setData({
-          username: res.data.username,
-          gender: res.data.gender,
-          tel: res.data.tel,
-          email: res.data.email,
-          hometown: res.data.hometown,
-          signal: res.data.signal,
+          username: res.data[0].username,
+          gender: res.data[0].gender,
+          tel: res.data[0].tel,
+          email: res.data[0].email,
+          hometown: res.data[0].hometown,
+          signal: res.data[0].signal,
         })
       }
     })
@@ -76,6 +76,9 @@ Page({
       header: { 'Content-Type': 'application/json' },
       success: function (res) {
         console.log(res.data)
+        wx.navigateBack({
+          delta:1
+        })
       }
     })
   },

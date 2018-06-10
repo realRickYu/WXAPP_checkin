@@ -50,9 +50,6 @@ Page({
       },
       login:true,
       header: { 'Content-Type': 'application/json' },
-      success: function (res) {
-        console.log(res.data)
-      }
     })
     wx.switchTab({
       url: "../publish/publish"})

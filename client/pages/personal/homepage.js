@@ -1,4 +1,4 @@
-// pages/place/placehomepage.js
+// pages/personal/homepage.js
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
@@ -10,12 +10,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    endtime: '',
+    list: [],
     searchLoading: true, //"上拉加载"的变量，默认true，显示  
     searchLoadingComplete: false,  //“没有更多”的变量，默认false，隐藏
-    list: [],
-    adrname:'',
-    adrid:''
+    username:'',
+    id:'',
+    friendflag:false,
+    added:false,
+    endtime: ''
   },
 
   /**
@@ -25,14 +27,29 @@ Page({
     var that = this
     console.log(options)
     that.setData({
-      adrid: options.adrid,
+      id: options.id,
+      username: options.username,
+    })
+    qcloud.request({
+      url: config.service.relationUrl,
+      data: {
+        id: getApp().globalData.userId,
+        otherpersonid: options.id
+      },
+      login: true,
+      header: { 'Content-Type': 'application/json' },
+      success: function (res) {
+        console.log(res.data)
+        that.setData({
+          friendflag: res.data
+        })
+      }
     })
     var starttime = new Date().getTime();
-
     qcloud.request({
-      url: config.service.placeUrl,
+      url: config.service.otherpersonUrl,
       data: {
-        adrid: options.adrid,
+        otherpersonid: options.id,
         starttime: starttime
       },
       login: true,
@@ -47,7 +64,7 @@ Page({
           })
           return
         }
-        var endtime = res.data[index].date;
+        var endtime = res.data[index].sendtime;
         that.setData({
           endtime: endtime
         })
@@ -95,9 +112,9 @@ Page({
     var that = this;
     var starttime = that.data.endtime;
     qcloud.request({
-      url: config.service.timelineUrl,
+      url: config.service.otherpersonUrl,
       data: {
-        id: getApp().globalData.userId,
+        id: id,
         starttime: starttime
       },
       login: true,
@@ -112,7 +129,7 @@ Page({
           })
           return
         }
-        var endtime = res.data[index].date;
+        var endtime = res.data[index].sendtime;
         that.setData({
           endtime: endtime
         })
@@ -190,7 +207,25 @@ Page({
       }
     })
   },
-  backtoSwitch: function () {
+  addfriend:function(){
+    var that=this;
+    qcloud.request({
+      url: config.service.addfriendUrl,
+      data: {
+        id: getApp().globalData.userId,
+        otherpersonid: that.data.id
+      },
+      login: true,
+      header: { 'Content-Type': 'application/json' },
+      success: function (res) {
+        that.setData({
+          added: true
+        })
+
+    }
+    })
+  },
+  backtoSwitch:function(){
     wx.switchTab({
       url: '../timeline/timeline',
     })
@@ -227,13 +262,12 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    var that = this
+    var that = this;
     var starttime = new Date().getTime();
-
     qcloud.request({
-      url: config.service.placeUrl,
+      url: config.service.otherpersonUrl,
       data: {
-        adrid: that.data.adrid,
+        otherpersonid: options.id,
         starttime: starttime
       },
       login: true,
@@ -248,7 +282,7 @@ Page({
           })
           return
         }
-        var endtime = res.data[index].data;
+        var endtime = res.data[index].sendtime;
         that.setData({
           endtime: endtime
         })

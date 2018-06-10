@@ -1,0 +1,12 @@
+<!--pages/search/searchusers.wxml-->
+<view class='search-input'>
+  <input class="input-text" auto-focus='true' placeholder="输名字、电话、家乡或者邮箱试试能不能找到TA" confirm-type='search' value="{{userInput}}" bindinput='search'/>
+  <view class='cancelbutton' bindtap='cancel'>清空</view>
+</view>
+<view class="search">  
+  <view class="search-result">  
+    <block class="result-item" wx:for="{{list}}" wx:key="*item" >  
+      <view class='username' data-index='{{index}}' bindtap="gotoHP">{{item.user_name}}</view>
+    </block>  
+  </view>  
+</view>  

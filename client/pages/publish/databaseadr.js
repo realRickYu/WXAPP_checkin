@@ -14,10 +14,7 @@ Page({
       {id:1,name:'自动测试1',dis:'0.1km'},
       { id: 2, name: '自动测试2', dis: '0.2km'},
       ],
-    searchlist: [
-      { id: 3, name: '搜索测试1', dis: '0.1km' },
-      { id: 4, name: '搜索测试2', dis: '0.15km' },
-      ],
+    searchlist: [],
   },
   onLoad: function () {
     var that = this
@@ -26,20 +23,22 @@ Page({
         that.setData({
           latitude: res.latitude,
           longitude: res.longitude,
-        }),
+        })
+        var lati = res.latitude
+        var longi = res.longitude
         //上传坐标值换回20个地名的列表
         qcloud.request({
           url: config.service.suggestedadrUrl,
           data: {
-            latitude: res.latitude,
-            longitude: res.longitude,
+            latitude: lati,
+            longitude: longi,
           },
           login: true,
           header: { 'Content-Type': 'application/json' },
           success: function (res) {
-            console.log(res.data)
+            console.log(res)
             that.setData({
-              autolist: res.data.autolist
+              autolist: res.data
             })
             //var autolist = res.data.autolist;
             // for (var i in autolist)
@@ -66,6 +65,10 @@ Page({
   search:function(e){
     var that = this;
     var userInput = e.detail.value;
+    if (userInput=='')
+    {
+      return;
+    }
     //清空之前的列表，上传该地址名称，返回的值建议头匹配
     qcloud.request({
       url: config.service.searchadrUrl,
@@ -77,7 +80,7 @@ Page({
       success: function (res) {
         console.log(res.data)
         that.setData({
-          searchlist: res.data.searchlist
+          searchlist: res.data
         })
       }
     })

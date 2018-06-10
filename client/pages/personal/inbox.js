@@ -1,4 +1,4 @@
-// pages/user/registered.js
+// pages/personal/inbox.js
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
@@ -10,35 +10,60 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    list: []
   },
-
+ 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //查看此openID是否注册过，若注册过，则跳至时间线界面，若没有，则跳至注册界面
+    var that = this;
+    var starttime = new Date().getTime();
     qcloud.request({
-      url: config.service.registeredUrl,
+      url: config.service.inboxUrl,
       data: {
-        id: getApp().globalData.userId
+        id: getApp().globalData.userId,
+        starttime: starttime
       },
       login: true,
       header: { 'Content-Type': 'application/json' },
-      //返回userID或者未注册过的标识
       success: function (res) {
-        console.log(res)
-        console.log('success')
-        var register = res.data;//根据openID判断是否注册过，false和true
-        if (!register) {
-          wx.navigateTo({ url: "useradd" })
-        } else{
-          wx.switchTab({ url: "../timeline/timeline" })
-        }
+        console.log(res.data)
+        that.setData({
+          list: res.data,
+        })
       }
     })
   },
-
+  agree: function (e) {
+    var that = this;
+    var index = e.target.dataset.index;
+    var otherpersonid = that.data.list[index].ori_id;
+    qcloud.request({
+      url: config.service.agreefriendUrl,
+      data: {
+        id: getApp().globalData.userId,
+        otherpersonid: otherpersonid
+      },
+      login: true,
+      header: { 'Content-Type': 'application/json' },
+      success: function (res) {
+        console.log(res.data)
+        that.data.list.splice(index, 1);
+        that.setData({
+          list: that.data.list,
+        })
+      }
+    })
+  },
+  disagree: function (e) {
+    var that = this;
+    var index = e.target.dataset.index;
+    that.data.list.splice(index, 1);
+    that.setData({
+      list: that.data.list,
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

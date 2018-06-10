@@ -1,4 +1,4 @@
-// pages/user/registered.js
+// pages/search/searchusers.js
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 var util = require('../../utils/util.js')
@@ -10,33 +10,47 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    userInput: '',
+    list: []
   },
-
+  search: function (e) {
+    var that = this;
+    var userInput = e.detail.value;
+    if (userInput == '') {
+      return;
+    }
+    qcloud.request({
+      url: config.service.findpersonUrl,
+      data: {
+        value: userInput,
+      },
+      login: true,
+      header: { 'Content-Type': 'application/json' },
+      success: function (res) {
+        console.log(res.data)
+        that.setData({
+          list: res.data
+        })
+      }
+    })
+  },
+  cancel: function () {
+    this.setData({
+      userInput: ''
+    })
+  },
+  gotoHP:function(e){
+    var that = this;
+    var index = e.target.dataset.index;
+    wx.redirectTo({
+      url: '../personal/homepage?id=' + that.data.list[index].open_id + '&username=' + that.data.list[index].user_name
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //查看此openID是否注册过，若注册过，则跳至时间线界面，若没有，则跳至注册界面
-    qcloud.request({
-      url: config.service.registeredUrl,
-      data: {
-        id: getApp().globalData.userId
-      },
-      login: true,
-      header: { 'Content-Type': 'application/json' },
-      //返回userID或者未注册过的标识
-      success: function (res) {
-        console.log(res)
-        console.log('success')
-        var register = res.data;//根据openID判断是否注册过，false和true
-        if (!register) {
-          wx.navigateTo({ url: "useradd" })
-        } else{
-          wx.switchTab({ url: "../timeline/timeline" })
-        }
-      }
-    })
+  
   },
 
   /**

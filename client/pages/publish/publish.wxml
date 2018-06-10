@@ -14,7 +14,7 @@
       <view class="weui-cell__bd">
         <view class="weui-uploader">
           <view class="weui-uploader__hd">
-            <image class="cameraicon" src='camera.png' style="width: 35px; height: 35px;" mode="aspectFit"></image>
+            <image class="cameraicon" src='../../common/camera.png' style="width: 35px; height: 35px;" mode="aspectFit"></image>
             <view class="weui-uploader__info">{{imageList.length}}/1</view>
           </view>
           <view class="weui-uploader__bd">

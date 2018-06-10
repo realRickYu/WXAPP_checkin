@@ -92,7 +92,16 @@ var config = {
 
         //点赞
         likeUrl: `${host}/weapp/like`,
+
+        //根据地址id获取相关信息
+        adinfoUrl: `${host}/weapp/adinfo`,
+
+        //地址信息(friend)
+        adrinfofriendUrl: `${host}/weapp/adrinfofriend`,
         
+        //根据动态的id返回点赞的所有人的id及name
+        likegroupUrl: `${host}/weapp/likegroup`,
+
     }
 };
 

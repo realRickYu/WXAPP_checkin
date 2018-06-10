@@ -8,8 +8,11 @@
     "pages/publish/addadr",
     "pages/timeline/timeline",
     "pages/personal/personal",
+    "pages/personal/homepage",
+    "pages/personal/inbox",
     "pages/place/placeinfo",
-    "pages/place/placehomepage"
+    "pages/place/placehomepage",
+    "pages/search/searchusers"
   ],
   "window":{
     "backgroundColor":"#F6F6F6",

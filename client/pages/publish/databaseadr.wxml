@@ -5,14 +5,14 @@
 <view class='adrlist' hidden='{{hideflag}}'>
   <radio-group class="radio-group" bindchange="radioChangeAuto">
     <label class="radio" wx:for="{{autolist}}" wx:key="*item">
-      <radio value="{{item.id}}|{{item.name}}"/>{{item.name}}     {{item.dis}}
+      <radio value="{{item.id}}|{{item.place_name}}"/>{{item.place_name}}     {{item.dis}}
     </label>
   </radio-group>
 </view>
 <view class='adrlist' hidden='{{!hideflag}}'>
   <radio-group class="radio-group" bindchange="radioChangeSearch">
     <label class="radio" wx:for="{{searchlist}}" wx:key="*item">
-      <radio value="{{item.id}}|{{item.name}}"/>{{item.name}}     {{item.dis}}
+      <radio value="{{item.id}}|{{item.place_name}}"/>{{item.place_name}}
     </label>
   </radio-group>
 </view>
