@@ -25,8 +25,8 @@ module.exports = async (ctx, next) => {
 
   const { mysql } = require('../qcloud')
   // await mysql('location').select(mysql.raw('id,place_name,6371*sqrt(pow(abs(longitude -?)*3.14/180,2)+pow(abs(latitude -?)*3.14/180,2)) as dis', [lng, lat]))
-  await mysql('location').select(mysql.raw('id,place_name,6371*2 * asin(sqrt(pow(sin((latitude-?)*3.14/360), 2) + cos(latitude*3.14/180) * cos(?*3.14/180) * pow(sin((longitude-?)*3.14 / 360), 2)))', [lat,lat,lng]))
-    .where(mysql.raw('abs(longitude -?)<0.01 and abs(latitude -?)<0.01', [lng, lat]))
+  await mysql('location').select(mysql.raw('id,place_name,6371*2 * asin(sqrt(pow(sin((latitude-?)*3.14/360), 2) + cos(latitude*3.14/180) * cos(?*3.14/180) * pow(sin((longitude-?)*3.14 / 360), 2))) as dis', [lat,lat,lng]))
+    .where(mysql.raw('abs(longitude -?)<0.1 and abs(latitude -?)<0.1', [lng, lat]))
     // .orderBy(mysql.raw('(abs(longitude -?)+abs(latitude -?))', [lng, lat]))
     .orderBy(mysql.raw('dis'))
     .limit(20)

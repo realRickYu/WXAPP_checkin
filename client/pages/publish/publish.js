@@ -148,7 +148,7 @@ Page({
     var imagelist = that.data.imageList;
     var adrid = that.data.adrid;
     var input = that.data.inputValue;
-    var publicpublish = that.data.publicpublish;
+    var publicpublish = that.data.publicpublish.toString();
     var sendtime = new Date().getTime();
     if (imagelist.length == 0) {
       //无图上传
@@ -187,9 +187,10 @@ Page({
           text: input,
           publicpublish: publicpublish
         },
-        login: true,
-        header: { 'Content-Type': 'application/json' },
+        // login: true,
+        // header: { 'Content-Type': 'application/json' },
         success: function (res) {
+          console.log(adrid,sendtime,input,publicpublish)
           console.log('uploadImage success, res is:', res)
           wx.redirectTo({ url: '../place/placeinfo?adrid=' + adrid })
         },

@@ -10,10 +10,7 @@ Page({
     hideflag: false,
     buttonflag:true,
     userInput:'',
-    autolist: [
-      {id:1,name:'自动测试1',dis:'0.1km'},
-      { id: 2, name: '自动测试2', dis: '0.2km'},
-      ],
+    autolist: [],
     searchlist: [],
   },
   onLoad: function () {
@@ -40,18 +37,13 @@ Page({
             that.setData({
               autolist: res.data
             })
-            //var autolist = res.data.autolist;
-            // for (var i in autolist)
-            // {
-            //   var newarray=[{
-            //     id:autolist[i].id,
-            //     name: autolist[i].name,
-            //     dis: autolist[i].dis,
-            //   }];
-            //   that.setData({
-            //     'autolist': that.data.autolist.concat(newarray)
-            //   })
-            // }
+            for (var i = 0; i < that.data.autolist.length; i++) {
+              that.data.autolist[i].dis = that.data.autolist[i].dis.toFixed(2)
+            }
+            console.log(that.data.autolist)
+            that.setData({
+              autolist: that.data.autolist
+            })
           }
         })
       }

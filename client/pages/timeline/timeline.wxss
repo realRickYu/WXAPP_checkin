@@ -5,7 +5,6 @@ page{
   flex-direction: column;  
   height: 100%;  
 }  
-  
 /*搜索*/  
 .search{  
   flex: auto;  

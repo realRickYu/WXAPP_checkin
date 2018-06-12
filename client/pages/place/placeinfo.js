@@ -13,7 +13,7 @@ Page({
     adrid:'',
     adrname:'',
     mayor:[],
-    friends: [{ userid: '1234', username: '大王' }, { userid: '12345', username: '小王' },]
+    friends: []
   },
 
   /**
@@ -39,15 +39,31 @@ Page({
       }
     })
     qcloud.request({
-      url: config.service.adrinfoUrl,
+      url: config.service.adrinfoUrl,    
       data: {
         adrid: options.adrid,
       },
       login: true,
       header: { 'Content-Type': 'application/json' },
       success: function (res) {
+        console.log(res)
         that.setData({
           mayor: res.data
+        })
+        qcloud.request({
+          url: config.service.getuserinfoUrl,
+          data: {
+            id: res.data[0].user_id
+          },
+          login: true,
+          header: { 'Content-Type': 'application/json' },
+          success: function (res) {
+            console.log(res)
+            that.data.mayor[0].user_name = res.data[0].user_name
+            that.setData({
+              mayor: that.data.mayor
+            })
+          }
         })
       }
     })
@@ -60,9 +76,75 @@ Page({
       login: true,
       header: { 'Content-Type': 'application/json' },
       success: function (res) {
-        that.setData({
-          friends: res.data
-        })
+        console.log(res)
+        for (var i = 0; i < res.data.length; i++)
+        {
+          var newarray = [{
+            user_id: res.data[i].user_id,
+          }];
+          that.data.friends = that.data.friends.concat(newarray)
+        }
+        // that.setData({
+        //   friends: res.data
+        // })
+        if (res.data.length>0)
+        {
+          var tempid = res.data[0].user_id;
+          qcloud.request({
+            url: config.service.getuserinfoUrl,
+            data: {
+              id: tempid
+            },
+            login: true,
+            header: { 'Content-Type': 'application/json' },
+            success: function (res) {
+              console.log(res)
+   
+              that.data.friends[0].user_name = res.data[0].user_name
+              that.setData({
+                friends: that.data.friends
+              })
+            }
+          })
+        }
+        if (res.data.length > 1) {
+          var tempid = res.data[1].user_id;
+          qcloud.request({
+            url: config.service.getuserinfoUrl,
+            data: {
+              id: tempid
+            },
+            login: true,
+            header: { 'Content-Type': 'application/json' },
+            success: function (res) {
+              console.log(res)
+              that.data.friends[1].user_id = tempid
+              that.data.friends[1].user_name = res.data[1].user_name
+              that.setData({
+                friends: that.data.friends
+              })
+            }
+          })
+        }
+        if (res.data.length > 2) {
+          var tempid = res.data[2].user_id;
+          qcloud.request({
+            url: config.service.getuserinfoUrl,
+            data: {
+              id: tempid
+            },
+            login: true,
+            header: { 'Content-Type': 'application/json' },
+            success: function (res) {
+              console.log(res)
+              that.data.friends[2].user_id = tempid
+              that.data.friends[2].user_name = res.data[2].user_name
+              that.setData({
+                friends: that.data.friends
+              })
+            }
+          })
+        }
       }
     })
   },
@@ -76,4 +158,17 @@ Page({
       url: '../timeline/timeline',
     })
   },
+  mayorHP: function () {
+    var that = this;
+    wx.redirectTo({
+      url: '../personal/homepage?id=' + that.data.mayor[0].user_id + '&username=' + that.data.mayor[0].user_name
+    })
+  },
+  friendHP: function (e) {
+    var that = this;
+    var index = e.target.dataset.index;
+    wx.redirectTo({
+      url: '../personal/homepage?id=' + that.data.friends[index].user_id + '&username=' + that.data.friends[index].user_name
+    })
+}
 })

@@ -1,1 +1,37 @@
 /* pages/place/placeinfo.wxss */
+.success {
+  text-align: center;
+  color: #FFD700;
+  height: 100rpx;
+}
+
+.placename {
+  text-align: center;
+  height: 100rpx;
+}
+
+.mayor {
+  font-weight: bold;
+}
+
+.friends {
+  display: flex;
+  height: 400rpx;
+}
+
+.plase_homepage {
+  color: blue;
+  text-decoration: underline;
+  text-align: center;
+  height: 100rpx;
+}
+
+.nav-hover {
+  color: red;
+}
+.homepage {
+  color: blue;
+  text-decoration: underline;
+  text-align: center;
+  height: 100rpx;
+}

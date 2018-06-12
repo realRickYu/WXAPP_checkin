@@ -24,13 +24,14 @@ Page({
       login: true,
       header: { 'Content-Type': 'application/json' },
       success: function (res) {
+        console.log(res)
         that.setData({
-          username: res.data[0].username,
+          username: res.data[0].user_name,
           gender: res.data[0].gender,
-          tel: res.data[0].tel,
-          email: res.data[0].email,
+          tel: res.data[0].phone,
+          email: res.data[0].mail,
           hometown: res.data[0].hometown,
-          signal: res.data[0].signal,
+          signal: res.data[0].signature,
         })
       }
     })

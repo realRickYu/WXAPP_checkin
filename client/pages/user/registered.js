@@ -10,13 +10,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
-  },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+  },
+  onGotUserInfo: function (e) {
     //查看此openID是否注册过，若注册过，则跳至时间线界面，若没有，则跳至注册界面
     qcloud.request({
       url: config.service.registeredUrl,
@@ -30,13 +26,19 @@ Page({
         console.log(res)
         console.log('success')
         var register = res.data;//根据openID判断是否注册过，false和true
-        if (!register) {
+        if (register) {
           wx.navigateTo({ url: "useradd" })
-        } else{
+        } else {
           wx.switchTab({ url: "../timeline/timeline" })
         }
       }
     })
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+
   },
 
   /**

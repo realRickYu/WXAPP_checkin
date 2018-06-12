@@ -1,12 +1,12 @@
 <!--pages/place/placeinfo.wxml-->
 <view class='success'>签到成功</view>
 <view class='placename'>{{adrname}}</view>
-<view class='mayor'>{{mayor[0].user_name}}是此地代表，30天里在此地身经百战{{mayor[0].cid}}次</view>
+<view class='mayor' bindtap='mayorHP'>{{mayor[0].user_name}}是此地代表，30天里在此地身经百战{{mayor[0].cid}}次</view>
 <block wx:if="{{friends.length!=0}}">
   <view class='friends'>
     <view>你的朋友</view>
     <view wx:for="{{friends}}" wx:key="*item">
-      <view>{{item.user_name}} </view>
+      <view class='friend' bindtap='friendHP' data-index='{{index}}'>{{item.user_name}} </view>
     </view>
     <view>最近来过</view>
   </view>

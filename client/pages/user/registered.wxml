@@ -1,2 +1,2 @@
 <!--pages/user/registered.wxml-->
-<text>pages/user/registered.wxml</text>
+<button open-type="getUserInfo" bindgetuserinfo="onGotUserInfo">一键登录</button>

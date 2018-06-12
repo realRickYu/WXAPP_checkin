@@ -5,7 +5,7 @@
 <view class='adrlist' hidden='{{hideflag}}'>
   <radio-group class="radio-group" bindchange="radioChangeAuto">
     <label class="radio" wx:for="{{autolist}}" wx:key="*item">
-      <radio value="{{item.id}}|{{item.place_name}}"/>{{item.place_name}}     {{item.dis}}
+      <radio value="{{item.id}}|{{item.place_name}}"/>{{item.place_name}}     {{item.dis}}千米
     </label>
   </radio-group>
 </view>

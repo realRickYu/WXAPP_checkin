@@ -100,7 +100,7 @@ var config = {
         adrinfofriendUrl: `${host}/weapp/adrinfofriend`,
         
         //根据动态的id返回点赞的所有人的id及name
-        likegroupUrl: `${host}/weapp/likegroup`,
+        likegroupUrl: `${host}/weapp/test`,
 
     }
 };

@@ -1,1 +1,6 @@
 /* pages/personal/homepage.wxss */
+.result-item{  
+  position: relative;
+  display: flex;  
+  flex-direction: column;  
+}  

@@ -4,7 +4,7 @@
   <view class="search-result">  
     <block class="result-item" wx:for="{{list}}" wx:key="*item" >  
       <block wx:if='{{item.publicpublish=="true"}}'>
-        <view class='username'>{{item.user_name}}</view>
+        <view class='username' bindtap='gotoHP' data-index='{{index}}'>{{item.user_name}}</view>
         <view class='placename'>{{adrname}}</view>
         <view class='sendtime'>{{item.sendtime}}</view>
         <view class='text' wx:if='{{item.textvalue.length!=0}}'>{{item.text}}</view>

@@ -23,7 +23,7 @@ Page({
       url: config.service.inboxUrl,
       data: {
         id: getApp().globalData.userId,
-        starttime: starttime
+        checktime: starttime
       },
       login: true,
       header: { 'Content-Type': 'application/json' },

@@ -53,6 +53,7 @@ Page({
         })
 
         var templist = res.data;
+        var textid = [];
         for (var i = 0; i < res.data.length; i++) {
           var date = new Date(res.data[i].date);
           var Y = date.getFullYear() + '-';
@@ -63,19 +64,25 @@ Page({
           var s = date.getSeconds();
           var sendtime = Y + M + D + h + m + s;
           templist[i].sendtime = sendtime;
-          qcloud.request({
-            url: config.service.likegroupUrl,
-            data: {
-              recordid: templist[i].rid
-            },
-            login: true,
-            header: { 'Content-Type': 'application/json' },
-            success: function (res) {
-              console.log(res.data)
-              var likenumber = res.data.length;
+          textid.push(templist[i].rid);
+        }
+        that.setData({
+          list: templist,
+        })
+        qcloud.request({
+          url: config.service.likegroupUrl,
+          data: {
+            recordid: JSON.stringify(textid)
+          },
+          login: true,
+          header: { 'Content-Type': 'application/json' },
+          success: function (res) {
+            console.log(res.data)
+            for (var i = 0; i < templist.length; i++) {
+              var likenumber = res.data[i].length;
               var liked = false;
-              for (var j = 0; j < res.data.length; j++) {
-                if (res.data[j].ori_id == getApp().globalData.userId) {
+              for (var j = 0; j < res.data[i].length; j++) {
+                if (res.data[i][j].ori_id == getApp().globalData.userId) {
                   liked = true;
                   break;
                 }
@@ -83,10 +90,10 @@ Page({
               templist[i].liked = liked;
               templist[i].likenumber = likenumber;
             }
-          })
-        }
-        that.setData({
-          list: templist,
+            that.setData({
+              list: templist,
+            })
+          }
         })
       }
     })
@@ -95,9 +102,9 @@ Page({
     var that = this;
     var starttime = that.data.endtime;
     qcloud.request({
-      url: config.service.timelineUrl,
+      url: config.service.placeUrl,
       data: {
-        id: getApp().globalData.userId,
+        adrid: that.data.adrid,
         starttime: starttime
       },
       login: true,
@@ -118,6 +125,8 @@ Page({
         })
 
         var templist = res.data;
+        var textid = [];
+        var orilength = that.data.list.length;
         for (var i = 0; i < res.data.length; i++) {
           var date = new Date(res.data[i].date);
           var Y = date.getFullYear() + '-';
@@ -128,31 +137,35 @@ Page({
           var s = date.getSeconds();
           var sendtime = Y + M + D + h + m + s;
           templist[i].sendtime = sendtime;
-          qcloud.request({
-            url: config.service.likegroupUrl,
-            data: {
-              recordid: templist[i].rid
-            },
-            login: true,
-            header: { 'Content-Type': 'application/json' },
-            success: function (res) {
-              console.log(res.data)
-              var likenumber = res.data.length;
+          textid.push(templist[i].rid);    
+        }
+        var searchList = that.data.list.concat(templist)
+        qcloud.request({
+          url: config.service.likegroupUrl,
+          data: {
+            recordid: JSON.stringify(textid)
+          },
+          login: true,
+          header: { 'Content-Type': 'application/json' },
+          success: function (res) {
+            console.log(res.data)
+            for (var i = 0; i < templist.length; i++) {
+              var likenumber = res.data[i].length;
               var liked = false;
-              for (var j = 0; j < res.data.length; j++) {
-                if (res.data[j].ori_id == getApp().globalData.userId) {
+              for (var j = 0; j < res.data[i].length; j++) {
+                if (res.data[i][j].ori_id == getApp().globalData.userId) {
                   liked = true;
                   break;
                 }
               }
-              templist[i].liked = liked;
-              templist[i].likenumber = likenumber;
+              searchList[i + orilength].liked = liked;
+              searchList[i + orilength].likenumber = likenumber;
             }
-          })
-        }
-        var searchList = that.data.list.concat(templist)
-        that.setData({
-          list: searchList,
+            console.log(searchList+"searchList");
+            that.setData({
+              list: searchList,
+            })
+          }
         })
       }
     })
@@ -193,6 +206,13 @@ Page({
   backtoSwitch: function () {
     wx.switchTab({
       url: '../timeline/timeline',
+    })
+  },
+  gotoHP: function (e) {
+    var that = this;
+    var index = e.target.dataset.index;
+    wx.redirectTo({
+      url: '../personal/homepage?id=' + that.data.list[index].user_id + '&username=' + that.data.list[index].user_name
     })
   },
   /**
@@ -248,12 +268,13 @@ Page({
           })
           return
         }
-        var endtime = res.data[index].data;
+        var endtime = res.data[index].date;
         that.setData({
           endtime: endtime
         })
 
         var templist = res.data;
+        var textid = [];
         for (var i = 0; i < res.data.length; i++) {
           var date = new Date(res.data[i].date);
           var Y = date.getFullYear() + '-';
@@ -264,19 +285,25 @@ Page({
           var s = date.getSeconds();
           var sendtime = Y + M + D + h + m + s;
           templist[i].sendtime = sendtime;
-          qcloud.request({
-            url: config.service.likegroupUrl,
-            data: {
-              recordid: templist[i].rid
-            },
-            login: true,
-            header: { 'Content-Type': 'application/json' },
-            success: function (res) {
-              console.log(res.data)
-              var likenumber = res.data.length;
+          textid.push(templist[i].rid);
+        }
+        that.setData({
+          list: templist,
+        })
+        qcloud.request({
+          url: config.service.likegroupUrl,
+          data: {
+            recordid: JSON.stringify(textid)
+          },
+          login: true,
+          header: { 'Content-Type': 'application/json' },
+          success: function (res) {
+            console.log(res.data)
+            for (var i = 0; i < templist.length; i++) {
+              var likenumber = res.data[i].length;
               var liked = false;
-              for (var j = 0; j < res.data.length; j++) {
-                if (res.data[j].ori_id == getApp().globalData.userId) {
+              for (var j = 0; j < res.data[i].length; j++) {
+                if (res.data[i][j].ori_id == getApp().globalData.userId) {
                   liked = true;
                   break;
                 }
@@ -284,10 +311,10 @@ Page({
               templist[i].liked = liked;
               templist[i].likenumber = likenumber;
             }
-          })
-        }
-        that.setData({
-          list: templist,
+            that.setData({
+              list: templist,
+            })
+          }
         })
       }
     })
