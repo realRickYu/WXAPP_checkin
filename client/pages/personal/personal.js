@@ -10,7 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    newmessage:'false',
+    newmessage:false,
     latitude: 23.099994,
     longitude: 113.324520,
     markers: [{
@@ -188,7 +188,7 @@ Page({
   },
   checkinbox:function(){
     this.setData({
-      newmessage:'false'
+      newmessage:false
     })
     wx.navigateTo({
       url: 'inbox',
