@@ -1,7 +1,7 @@
 <!--pages/place/placeinfo.wxml-->
 <!-- 空白 -->
 <view style='height:10px'></view>
-<view class='success'>签到成功！</view>
+<view class='success' wx:if="{{checkflag=='true'}}">签到成功！</view>
 <!-- 分割线 -->
 <view class="div"></view>
 <!-- 空白 -->

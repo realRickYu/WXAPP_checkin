@@ -203,7 +203,7 @@ Page({
     var that = this;
     var index = e.target.dataset.index;
     wx.navigateTo({
-      url: '../place/placeinfo?adrid=' + that.data.list[index].position
+      url: '../place/placeinfo?adrid=' + that.data.list[index].position + '&checkflag=' + false
     })
   },
   /**

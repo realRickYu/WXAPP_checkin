@@ -10,6 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    checkflag:'true',
     adrid:'',
     adrname:'',
     mayor:[],
@@ -24,6 +25,7 @@ Page({
     console.log(options)
     that.setData({
       adrid: options.adrid,
+      checkflag: options.checkflag
     })
     qcloud.request({
       url: config.service.adinfoUrl,

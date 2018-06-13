@@ -164,7 +164,7 @@ Page({
         login: true,
         header: { 'Content-Type': 'application/json' },
         success: function (res) {
-          wx.redirectTo({ url: '../place/placeinfo?adrid=' + adrid })
+          wx.redirectTo({ url: '../place/placeinfo?adrid=' + adrid + '&checkflag=' + true })
         },
         fail: function ({ errMsg }) {
           wx.showToast({
@@ -192,7 +192,7 @@ Page({
         success: function (res) {
           console.log(adrid,sendtime,input,publicpublish)
           console.log('uploadImage success, res is:', res)
-          wx.redirectTo({ url: '../place/placeinfo?adrid=' + adrid })
+          wx.redirectTo({ url: '../place/placeinfo?adrid=' + adrid + '&checkflag=' + true})
         },
         fail: function ({ errMsg }) {
           console.log('uploadImage fail, errMsg is', errMsg)
