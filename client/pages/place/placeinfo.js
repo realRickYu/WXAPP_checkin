@@ -169,6 +169,7 @@ Page({
   friendHP: function (e) {
     var that = this;
     var index = e.target.dataset.index;
+    console.log(index)
     wx.navigateTo({
       url: '../personal/homepage?id=' + that.data.friends[index].user_id + '&username=' + that.data.friends[index].user_name
     })

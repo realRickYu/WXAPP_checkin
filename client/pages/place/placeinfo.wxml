@@ -14,8 +14,8 @@
 <block wx:if="{{friends.length!=0}}">
   <view class='friends'>
     <view>你的朋友</view>
-    <block wx:for="{{friends}}" wx:key="*item" wx:for-index="idx">
-      <view class='friend' bindtap='friendHP' data-index='{{index}}' wx:if="{{idx!=friends.length-1}}">{{item.user_name}}、 </view>
+    <block wx:for="{{friends}}" wx:key="*item">
+      <view class='friend' bindtap='friendHP' data-index='{{index}}' wx:if="{{index!=friends.length-1}}">{{item.user_name}}、 </view>
       <view class='friend' bindtap='friendHP' data-index='{{index}}' wx:else>{{item.user_name}} </view>
     </block>
     <view>最近来过</view>

@@ -11,7 +11,7 @@
           <view>
             <view style="display: flex">
               <view class="details">
-                <view class='username'>{{item.user_name}}</view>
+                <view class='username' bindtap='gotoHP' data-index='{{index}}'>{{item.user_name}}</view>
                 <view class='sendtime'>{{item.sendtime}}</view>
               </view>
               <view class="placename">{{adrnsme}}</view>
