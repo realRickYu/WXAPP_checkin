@@ -19,7 +19,7 @@
     </label>
     <label class='addaddress'> 
       <radio value="new" class='radioadr'/>
-      <input class="input-text" bindinput="bindKeyInput" placeholder="不叫这个名字？请记录这个未被腾讯探索过的地方"/>
+      <input class="input-text" bindinput="bindKeyInput" placeholder="不叫这个名字？请记录这个地方"/>
     </label>
   </radio-group>
   <button class='confirmbutton' bindtap='confirm_add'>提交</button>

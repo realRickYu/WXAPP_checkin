@@ -1,1 +1,23 @@
 /* pages/personal/personal.wxss */
+
+.inf {
+  display: flex;
+  height: 100rpx;
+}
+
+.inboxicon {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.inbox {
+  width: 500rpx;
+  height: 50rpx;
+  align-items: center;
+}
+
+.modifyuser {
+  width: 150rpx;
+  height: 50rpx;
+  align-items: center;
+}

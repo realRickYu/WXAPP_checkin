@@ -1,7 +1,7 @@
 {
-  "pages":[
+  "pages": [
     "pages/user/registered",
-    "pages/user/useradd",    
+    "pages/user/useradd",
     "pages/user/usermodify",
     "pages/publish/publish",
     "pages/publish/databaseadr",
@@ -14,12 +14,12 @@
     "pages/place/placehomepage",
     "pages/search/searchusers"
   ],
-  "window":{
-    "backgroundColor":"#F6F6F6",
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "Wafer Quick Start",
-    "navigationBarTextStyle":"black",
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#09bb07",
+    "navigationBarTitleText": "见得多了",
+    "navigationBarTextStyle": "light",
     "enablePullDownRefresh": true
   },
   "tabBar": {
@@ -29,16 +29,22 @@
     "backgroundColor": "#ffffff",
     "list": [
       {
-        "pagePath": "pages/personal/personal",
-        "text": "个人"
+        "pagePath": "pages/timeline/timeline",
+        "text": "朋友",
+        "iconPath": "common/circle.jpg",
+        "selectedIconPath": "common/circle.jpg"
       },
       {
         "pagePath": "pages/publish/publish",
-        "text": "发布"
+        "text": "签到",
+        "iconPath": "common/sign.jpg",
+        "selectedIconPath": "common/sign.jpg"
       },
       {
-        "pagePath": "pages/timeline/timeline",
-        "text": "测试"
+        "pagePath": "pages/personal/personal",
+        "text": "个人",
+        "iconPath": "common/usr.jpg",
+        "selectedIconPath": "common/usr.jpg"
       }
     ]
   }

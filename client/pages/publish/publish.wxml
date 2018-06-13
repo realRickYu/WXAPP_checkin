@@ -41,4 +41,6 @@
     <view class="navigator-arrow"></view>
   </navigator>
 </view>
+<!-- 留空白 -->
+<view style='height:100rpx'></view>
 <view class='hint'>定位不准？下拉刷新试试</view>

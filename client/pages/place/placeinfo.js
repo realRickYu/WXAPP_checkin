@@ -84,7 +84,6 @@ Page({
           }];
           that.data.friends = that.data.friends.concat(newarray)
         }
-        console.log(that.data.friends)
         // that.setData({
         //   friends: res.data
         // })
@@ -119,7 +118,7 @@ Page({
             header: { 'Content-Type': 'application/json' },
             success: function (res) {
               console.log(res)
-              //that.data.friends[1].user_id = tempid
+              that.data.friends[1].user_id = tempid
               that.data.friends[1].user_name = res.data[0].user_name
               that.setData({
                 friends: that.data.friends

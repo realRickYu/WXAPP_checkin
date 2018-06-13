@@ -1,15 +1,28 @@
 <!--pages/place/placeinfo.wxml-->
-<view class='success'>签到成功</view>
+<!-- 空白 -->
+<view style='height:10px'></view>
+<view class='success'>签到成功！</view>
+<!-- 分割线 -->
+<view class="div"></view>
+<!-- 空白 -->
+<view style='height:10px'></view>
 <view class='placename'>{{adrname}}</view>
-<view class='mayor' bindtap='mayorHP'>{{mayor[0].user_name}}是此地代表，30天里在此地身经百战{{mayor[0].cid}}次</view>
+<view class='leader'>
+  <text class='mayor' bindtap='mayorHP'>{{mayor[0].user_name}}</text>
+  <text>是此地代表，30天里在此地身经百战{{mayor[0].cid}}次</text>
+</view>
 <block wx:if="{{friends.length!=0}}">
   <view class='friends'>
     <view>你的朋友</view>
-    <view wx:for="{{friends}}" wx:key="*item">
-      <view class='friend' bindtap='friendHP' data-index='{{index}}'>{{item.user_name}} </view>
-    </view>
+    <block wx:for="{{friends}}" wx:key="*item" wx:for-index="idx">
+      <view class='friend' bindtap='friendHP' data-index='{{index}}' wx:if="{{idx!=friends.length-1}}">{{item.user_name}}、 </view>
+      <view class='friend' bindtap='friendHP' data-index='{{index}}' wx:else>{{item.user_name}} </view>
+    </block>
     <view>最近来过</view>
   </view>
 </block>
-<view class='plase_homepage' bindtap='plase_homepage'>点击查看谁来过这个地方</view>
-<view class='homepage' bindtap='homepage'>回到首页</view>
+
+<view class='plase_homepage' hover-class='hover' bindtap='plase_homepage'>点击查看谁来过这个地方</view>
+<!-- 分割线 -->
+<view class="div"></view>
+<view class='homepage' hover-class='hover' bindtap='homepage'>回到首页</view>

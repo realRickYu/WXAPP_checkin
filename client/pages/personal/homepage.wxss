@@ -4,3 +4,13 @@
   display: flex;  
   flex-direction: column;  
 }  
+.backtoSwitch {
+  color: blue;
+  text-decoration: underline;
+  text-align: center;
+  height: 100rpx;
+}
+
+.hover {
+  color: red;
+}

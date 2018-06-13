@@ -1,24 +1,44 @@
 <!--pages/personal/homepage.wxml-->
 <view class='title'>{{username}}</view>
 <button class='addfriend' wx:if='{{friendflag}}' disabled='true'>你们已经是好友了</button>
+<button class='addfriend' wx:if='{{friendflag}}'>查看个人信息</button>
 <button class='addfriend' wx:if='{{(!friendflag)&&(!added)}}' bindtap='addfriend'>加我吧</button>
 <button class='addfriend' wx:if='{{added}}' disabled='true'>请求已发送</button>
-<view class="search">  
-  <view class="search-result">  
-    <block class="result-item" wx:for="{{list}}" wx:key="*item" >
+<view class="search">
+  <view class="search-result">
+    <block class="result-item" wx:for="{{list}}" wx:key="*item">
       <block wx:if='{{(friendflag) || (item.publicpublish=="true")}}'>
-        <view class='username'>{{username}}</view>
-        <view class='placename'>{{item.place_name}}</view>
-        <view class='sendtime'>{{item.sendtime}}</view>
-        <view class='text' wx:if='{{item.textvalue.length!=0}}'>{{item.text}}</view>
-        <image class="weui-uploader__img" wx:if='{{item.image!=null}}' src="{{item.image}}" data-src="{{item.image}}" style="width: 200px; height: 200px;" mode="aspectFit"bindtap="previewImage"></image>
-        <image class="like" wx:if='{{item.liked}}' src='../../common/heart_true.png' style="width: 35px; height: 35px;" mode="aspectFit"></image>
-        <image class="like" wx:if='{{!item.liked}}' src='../../common/heart_false.png' style="width: 35px; height: 35px;" mode="aspectFit" data-index='{{index}}' bindtap="like"></image>
-        <view class='likenumber' wx:if='{{item.likenumber!=0}}'>{{item.likenumber}}</view>
-     </block>    
-    </block>  
-    <view class="loading" hidden="{{!searchLoading}}">正在载入更多...</view>  
-    <view class="loading complete" hidden="{{!searchLoadingComplete}}">没有了</view>     
-  </view>  
-</view>  
-<view class='backtoSwitch' bindtap='backtoSwitch'>回到首页</view>
+        <!-- 留空白 -->
+        <view style='height:20rpx'></view>
+        <view style="display: flex">
+          <image class="image" src="../../common/anonymous.png"></image>
+          <view>
+            <view style="display: flex">
+              <view class="details">
+                <view class='username'>{{username}}</view>
+                <view class='sendtime'>{{item.sendtime}}</view>
+              </view>
+              <view class="placename">{{item.place_name}}</view>
+            </view>
+            <view class='text' wx:if='{{item.textvalue.length!=0}}'>{{item.text}}</view>
+            <!-- 留空白 -->
+            <view style='height:20rpx'></view>
+            <image class="weui-uploader__img" wx:if='{{item.image!=null}}' src="{{item.image}}" data-src="{{item.image}}" style="width: 200px; height: 200px;" mode="aspectFit" bindtap="previewImage"></image>
+          </view>
+          <view class="heart">
+            <image class="like" wx:if='{{item.liked}}' src='../../common/heart_true.png' style="width: 35rpx; height: 35rpx;" mode="aspectFit"></image>
+            <image class="like" wx:if='{{!item.liked}}' src='../../common/heart_false.png' style="width: 35rpx; height: 35rpx;" mode="aspectFit" data-index='{{index}}' bindtap="like"></image>
+            <view class='likenumber' wx:if='{{item.likenumber!=0}}'>{{item.likenumber}}</view>
+          </view>
+        </view>
+        <!-- 留空白 -->
+        <view style='height:50rpx'></view>
+        <!-- 分割线 -->
+        <view class="div"></view>
+      </block>
+    </block>
+    <view class="loading" hidden="{{!searchLoading}}">正在载入更多...</view>
+    <view class="loading complete" hidden="{{!searchLoadingComplete}}">没有了</view>
+  </view>
+</view>
+<view class='backtoSwitch' hover-class='hover' bindtap='backtoSwitch'>回到首页</view>
