@@ -33,7 +33,7 @@
               <view class='username'>{{item.user_name}}</view>
               <view class='sendtime'>{{item.sendtime}}</view>
             </view>
-            <view class="placename">{{item.place_name}}</view>
+            <view class="placename" bindtap='placeHP' data-index='{{index}}'>{{item.place_name}}</view>
           </view>
           <view class='text' wx:if='{{item.textvalue.length!=0}}'>{{item.text}}</view>
           <!-- 留空白 -->
@@ -41,8 +41,7 @@
           <image class="weui-uploader__img" wx:if='{{item.image!=null}}' src="{{item.image}}" data-src="{{item.image}}" style="width: 200px; height: 200px;" mode="aspectFit" bindtap="previewImage"></image>
         </view>
         <view class="heart">
-          <image class="like" wx:if='{{item.liked}}' src='../../common/heart_true.png' style="width: 35rpx; height: 35rpx;" mode="aspectFit"></image>
-          <image class="like" wx:if='{{!item.liked}}' src='../../common/heart_false.png' style="width: 35rpx; height: 35rpx;" mode="aspectFit" data-index='{{index}}' bindtap="like"></image>
+          <image class="like" wx:if='{{item.likenumber!=0}}' src='../../common/heart_true.png' style="width: 35rpx; height: 35rpx;" mode="aspectFit"></image>
           <view class='likenumber' wx:if='{{item.likenumber!=0}}'>{{item.likenumber}}</view>
         </view>
       </view>

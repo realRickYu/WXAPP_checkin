@@ -14,7 +14,7 @@
               <view class='username'>{{item.user_name}}</view>
               <view class='sendtime'>{{item.sendtime}}</view>
             </view>
-            <view class="placename">{{item.place_name}}</view>
+            <view class="placename" bindtap='placeHP' data-index='{{index}}'>{{item.place_name}}</view>
           </view>
           <view class='text' wx:if='{{item.textvalue.length!=0}}'>{{item.text}}</view>
           <!-- 留空白 -->

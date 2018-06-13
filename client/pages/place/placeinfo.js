@@ -149,7 +149,7 @@ Page({
     })
   },
   plase_homepage:function(){
-    wx.reLaunch({
+    wx.navigateTo({
       url: 'placehomepage?adrid=' + this.data.adrid
     })
   },
@@ -160,14 +160,14 @@ Page({
   },
   mayorHP: function () {
     var that = this;
-    wx.redirectTo({
+    wx.navigateTo({
       url: '../personal/homepage?id=' + that.data.mayor[0].user_id + '&username=' + that.data.mayor[0].user_name
     })
   },
   friendHP: function (e) {
     var that = this;
     var index = e.target.dataset.index;
-    wx.redirectTo({
+    wx.navigateTo({
       url: '../personal/homepage?id=' + that.data.friends[index].user_id + '&username=' + that.data.friends[index].user_name
     })
 }

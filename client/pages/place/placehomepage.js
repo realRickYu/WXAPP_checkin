@@ -182,7 +182,7 @@ Page({
   like: function (e) {
     var that = this;
     var index = e.target.dataset.index;
-    var textid = that.data.list[index].textid;
+    var textid = that.data.list[index].id;
     qcloud.request({
       url: config.service.likeUrl,
       data: {
@@ -195,7 +195,7 @@ Page({
       success: function (res) {
         var listliked = "list[" + index + "].liked";
         var listlikenumber = "list[" + index + "].likenumber";
-        var likenumber = (parseInt(that.data.list[index].likenumber) + 1).toString();
+        var likenumber = that.data.list[index].likenumber + 1;
         that.setData({
           [listliked]: 'true',
           [listlikenumber]: likenumber
@@ -211,7 +211,7 @@ Page({
   gotoHP: function (e) {
     var that = this;
     var index = e.target.dataset.index;
-    wx.redirectTo({
+    wx.navigateTo({
       url: '../personal/homepage?id=' + that.data.list[index].user_id + '&username=' + that.data.list[index].user_name
     })
   },

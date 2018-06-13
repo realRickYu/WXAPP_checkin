@@ -42,7 +42,7 @@ Page({
   gotoHP:function(e){
     var that = this;
     var index = e.target.dataset.index;
-    wx.redirectTo({
+    wx.navigateTo({
       url: '../personal/homepage?id=' + that.data.list[index].open_id + '&username=' + that.data.list[index].user_name
     })
   },

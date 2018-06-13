@@ -10,6 +10,7 @@
     "pages/personal/personal",
     "pages/personal/homepage",
     "pages/personal/inbox",
+    "pages/personal/personalinfo",
     "pages/place/placeinfo",
     "pages/place/placehomepage",
     "pages/search/searchusers"

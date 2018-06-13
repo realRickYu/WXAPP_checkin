@@ -199,6 +199,13 @@ Page({
       url: '../user/usermodify',
     })
   },
+  placeHP: function (e) {
+    var that = this;
+    var index = e.target.dataset.index;
+    wx.navigateTo({
+      url: '../place/placeinfo?adrid=' + that.data.list[index].position
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

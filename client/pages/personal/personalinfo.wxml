@@ -1,0 +1,13 @@
+<wxs src="../user/common.wxs" module="checkEmail" />
+<form bindsubmit="formSubmit" bindreset="formReset">      
+  <input disabled='true' type="text" class="input-text" name="username" value='{{username}}' placeholder="昵称（方便朋友找到你，推荐使用真实姓名）"/>
+  <radio-group name="gender">
+    <label><radio disabled='true' value='male' checked='{{gender=="male"?true:flase}}' />男</label>
+    <label><radio disabled='true' value='female' checked='{{gender=="female"?true:flase}}' />女</label>
+    <label><radio disabled='true' value='secret' checked='true' checked='{{gender=="secret"?true:flase}}' />保密</label>
+  </radio-group>      
+  <input disabled='true' type="number" class="input-text" name="tel" value='{{tel}}' placeholder="电话（选填）" />
+  <input disabled='true' type="text" class="input-text" name="email" value='{{email}}'placeholder="邮箱（选填）" bindinput='emailInput' bindfocus='emailFocus'/>
+  <input disabled='true' type="text" class="input-text" name="hometown" value='{{hometown}}' placeholder="家乡（选填）" />
+  <input disabled='true' type="text" class="input-text" name="signal" value='{{signal}}' placeholder="签名（选填）" />     
+</form>

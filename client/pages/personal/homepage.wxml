@@ -1,7 +1,7 @@
 <!--pages/personal/homepage.wxml-->
 <view class='title'>{{username}}</view>
 <button class='addfriend' wx:if='{{friendflag}}' disabled='true'>你们已经是好友了</button>
-<button class='addfriend' wx:if='{{friendflag}}'>查看个人信息</button>
+<button class='addfriend' wx:if='{{friendflag}}' bindtap='checkinfo'>查看个人信息</button>
 <button class='addfriend' wx:if='{{(!friendflag)&&(!added)}}' bindtap='addfriend'>加我吧</button>
 <button class='addfriend' wx:if='{{added}}' disabled='true'>请求已发送</button>
 <view class="search">
@@ -18,7 +18,7 @@
                 <view class='username'>{{username}}</view>
                 <view class='sendtime'>{{item.sendtime}}</view>
               </view>
-              <view class="placename">{{item.place_name}}</view>
+              <view class="placename" bindtap='placeHP' data-index='{{index}}'>{{item.place_name}}</view>
             </view>
             <view class='text' wx:if='{{item.textvalue.length!=0}}'>{{item.text}}</view>
             <!-- 留空白 -->

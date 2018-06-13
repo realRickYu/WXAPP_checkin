@@ -200,7 +200,7 @@ Page({
   like: function (e) {
     var that = this;
     var index = e.target.dataset.index;
-    var textid = that.data.list[index].textid;
+    var textid = that.data.list[index].id;
     qcloud.request({
       url: config.service.likeUrl,
       data: {
@@ -213,9 +213,9 @@ Page({
       success: function (res) {
         var listliked = "list[" + index + "].liked";
         var listlikenumber = "list[" + index + "].likenumber";
-        var likenumber = (parseInt(that.data.list[index].likenumber) + 1).toString();
+        var likenumber = that.data.list[index].likenumber + 1;
         that.setData({
-          [listliked]: 'true',
+          [listliked]: true,
           [listlikenumber]: likenumber
         })
       }
@@ -242,6 +242,18 @@ Page({
   backtoSwitch:function(){
     wx.switchTab({
       url: '../timeline/timeline',
+    })
+  },
+  checkinfo:function(){
+    wx.navigateTo({
+      url: 'personalinfo?id='+this.data.id,
+    })
+  },
+  placeHP: function (e) {
+    var that = this;
+    var index = e.target.dataset.index;
+    wx.navigateTo({
+      url: '../place/placeinfo?adrid=' + that.data.list[index].position
     })
   },
   /**
